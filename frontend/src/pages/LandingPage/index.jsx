@@ -1,7 +1,7 @@
 import React from "react";
 
-const LangindPage = () => {
-  return <div>LangindPage</div>;
+const LandingPage = () => {
+  return <div>LandingPage</div>;
 };
 
-export default LangindPage;
+export default LandingPage;
