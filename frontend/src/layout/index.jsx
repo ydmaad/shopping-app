@@ -5,9 +5,9 @@ import Footer from "./Footer/index";
 
 const Layout = () => {
   return (
-    <div>
+    <div className="flex flex-col justify-between h-screen">
       <Navbar />
-      <main>
+      <main className="mb-auto max-w-4xl mx-auto">
         <Outlet />
       </main>
       <Footer />
