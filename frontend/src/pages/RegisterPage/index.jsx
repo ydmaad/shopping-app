@@ -1,13 +1,49 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 
 const RegisterPage = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({ mode: "onChange" });
+
+  const onSubmit = ({ email, name, password }) => {
+    const body = {
+      email,
+      name,
+      password,
+      image:
+        "https://unsplash.com/ko/%EC%82%AC%EC%A7%84/%EB%B9%A8%EA%B0%84-%ED%83%91-%EC%9E%A5%EB%82%9C%EA%B0%90%EC%9D%84-%EC%9E%85%EA%B3%A0-%EC%9E%88%EB%8A%94-%EC%86%8C%EB%85%84-Nh4rV0ParHw",
+    };
+
+    reset();
+  };
+
+  const userEmail = {
+    required: "필수 입력 필드입니다.",
+  };
+
+  const userName = {
+    required: "필수 입력 필드입니다.",
+  };
+
+  const userPassword = {
+    required: "필수 입력 필드입니다.",
+    minLength: {
+      value: 6,
+      message: "최소 6자입니다.",
+    },
+  };
+
   return (
     <>
       <section className="flex flex-col justify-center mt-20 max-w-[400px] m-auto">
-        <div className="p-6 bg-whtie rounded-md shadow-md">
+        <div className="p-6 bg-white rounded-md shadow-md">
           <h1 className="text-3xl font-semibold text-center">회원가입</h1>
 
-          <form className="mt-6">
+          <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-2">
               <label
                 htmlFor="email"
@@ -19,7 +55,13 @@ const RegisterPage = () => {
                 type="email"
                 id="email"
                 className="w-full px-4 py-2 mt-2 bg-white border rounded"
+                {...register("email", userEmail)}
               />
+              {errors?.email && (
+                <div>
+                  <span className="text-red-500">{errors.email.message}</span>
+                </div>
+              )}
             </div>
             <div className="mb-2">
               <label
@@ -32,7 +74,13 @@ const RegisterPage = () => {
                 type="text"
                 id="name"
                 className="w-full px-4 py-2 mt-2 bg-white border rounded"
+                {...register("name", userName)}
               />
+              {errors?.name && (
+                <div>
+                  <span className="text-red-500">{errors.name.message}</span>
+                </div>
+              )}
             </div>
             <div className="mb-2">
               <label
@@ -45,7 +93,15 @@ const RegisterPage = () => {
                 type="password"
                 id="password"
                 className="w-full px-4 py-2 mt-2 bg-white border rounded"
+                {...register("password", userPassword)}
               />
+              {errors?.password && (
+                <div>
+                  <span className="text-red-500">
+                    {errors.password.message}
+                  </span>
+                </div>
+              )}
             </div>
             <div className="mt-6">
               <button
