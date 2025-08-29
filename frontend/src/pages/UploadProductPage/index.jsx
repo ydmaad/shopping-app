@@ -56,7 +56,7 @@ const UploadProductPage = () => {
     }
   };
   return (
-    <section>
+    <section className="w-160">
       <div className="text-center m-7">
         <h1>예상 상품 업로드</h1>
       </div>

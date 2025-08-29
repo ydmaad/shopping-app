@@ -7,7 +7,7 @@ const FileUpload = ({ images, onImageChange }) => {
     let formData = new FormData();
 
     const config = {
-      header: { "content-type": "multipart/form-data" },
+      headers: { "content-type": "multipart/form-data" },
     };
 
     formData.append("file", files[0]);
@@ -17,6 +17,7 @@ const FileUpload = ({ images, onImageChange }) => {
         formData,
         config
       );
+      console.log("서버 응답:", response.data);
       onImageChange([...images, response.data.fileName]);
     } catch (error) {
       console.log(error);
@@ -25,7 +26,7 @@ const FileUpload = ({ images, onImageChange }) => {
 
   return (
     <div className="flex gap-4">
-      <Dropzone onDrop={(acceptedfiles) => console.log(acceptedfiles)}>
+      <Dropzone onDrop={handleDrop}>
         {({ getRootProps, getInputProps }) => (
           <section className="min-w-[300px] h-[300px] border flex items-center justify-center">
             <div {...getRootProps()}>
@@ -36,10 +37,10 @@ const FileUpload = ({ images, onImageChange }) => {
         )}
       </Dropzone>
       <div className="flex-grow h-[300px] border flex items-center justify-center overflow-x-scroll overflow-y-hidden">
-        {images.map((image) => (
-          <div key={image}>
+        {images.map((image, index) => (
+          <div key={`${image}-${index}`}>
             <img
-              src={`${import.meta.env.VITE_SERVER_URL}/${image}`}
+              src={`${import.meta.env.VITE_SERVER_URL}/uploads/${image}`}
               alt="upload-images"
               className="min-w-[300px] h-[300px]"
             />

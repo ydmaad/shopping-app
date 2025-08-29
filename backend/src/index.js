@@ -27,6 +27,8 @@ mongoose
 app.use(cors());
 // JSON 파일 미들웨어 - 요청 body의 JSON을 파싱
 app.use(express.json());
+// 정적 파일 제공 설정 - 업로드된 이미지 파일에 접근할 수 있게 함
+app.use("/uploads", express.static("uploads"));
 
 // ==========================
 // 라우트 설정
