@@ -10,6 +10,10 @@ import { authUser } from "./store/thunkFunctions";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import NotAuthRoutes from "./components/NotAuthRoutes";
 import ProfilePage from "./pages/ProfilePage";
+import UploadProductPage from "./pages/UploadProductPage";
+import DetailProductPage from "./pages/DetailProdectPage";
+import CartPage from "./pages/CartPage";
+import HistoryPage from "./pages/HistoryPage";
 
 function App() {
   const isAuth = useSelector((state) => state.user?.isAuth);
@@ -32,6 +36,10 @@ function App() {
           </Route>
 
           <Route element={<ProtectedRoutes isAuth={isAuth} />}>
+            <Route path="product/upload" element={<UploadProductPage />} />
+            <Route path="product/:productId" element={<DetailProductPage />} />
+            <Route path="user/cart" element={<CartPage />} />
+            <Route path="history" element={<HistoryPage />} />
             <Route path="profile" element={<ProfilePage />} />
           </Route>
         </Route>
