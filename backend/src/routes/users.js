@@ -52,4 +52,13 @@ router.get("/auth", auth, async (req, res, next) => {
   });
 });
 
+router.post("/logout", auth, async (req, res, next) => {
+  try {
+    return res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
+
 module.exports = router;
