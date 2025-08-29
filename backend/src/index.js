@@ -35,6 +35,7 @@ app.use(express.json());
 // users 관련 라우트를 별로 파일에서 관리
 // '/users' 경로로 시작하는 모든 요청을 './routes/users' 파일로 위임
 app.use("/users", require("./routes/users"));
+app.use("/products", require("./routes/products"));
 
 // ==========================
 // 에러 핸들링 미들웨어

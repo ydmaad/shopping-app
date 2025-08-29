@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import axiosInstance from "../../utils/axios";
+import { useNavigate } from "react-router-dom";
 
 const continents = [
   { key: 1, value: "Africa" },
@@ -11,19 +14,54 @@ const continents = [
 ];
 
 const UploadProductPage = () => {
+  const [product, setProduct] = useState({
+    title: "",
+    description: "",
+    price: 0,
+    continets: 1,
+    images: [],
+  });
+  const userData = useSelector((state) => state.user?.userData);
+  const navigate = useNavigate();
+
+  const hadleChange = (event) => {
+    const { name, value } = event.target;
+    setProduct((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const body = {
+      writer: userData._id,
+      ...product,
+    };
+
+    try {
+      await axiosInstance.post("/products", body);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <section>
       <div className="text-center m-7">
         <h1>예상 상품 업로드</h1>
       </div>
 
-      <form action="" className="mt-6">
+      <form onSubmit={handleSubmit} className="mt-6">
         <div className="mt-4">
           <label htmlFor="title">이름</label>
           <input
             name="title"
             id="title"
+            value={product.title}
             className="w-full px-4 py-2 bf-white border rounded-md"
+            onChange={hadleChange}
           />
         </div>
         <div className="mt-4">
@@ -31,7 +69,9 @@ const UploadProductPage = () => {
           <input
             name="description"
             id="description"
+            value={product.description}
             className="w-full px-4 py-2 bf-white border rounded-md"
+            onChange={hadleChange}
           />
         </div>
         <div className="mt-4">
@@ -39,7 +79,9 @@ const UploadProductPage = () => {
           <input
             name="price"
             id="price"
+            value={product.price}
             className="w-full px-4 py-2 bf-white border rounded-md"
+            onChange={hadleChange}
           />
         </div>
         <div className="mt-4">
@@ -47,7 +89,9 @@ const UploadProductPage = () => {
           <select
             name="continents"
             id="continents"
+            value={product.continets}
             className="w-full px-4 mt-2 bg-white border rounded-md"
+            onChange={hadleChange}
           >
             {continents.map((item) => (
               <option key={item.key} value="item.key">
@@ -57,7 +101,10 @@ const UploadProductPage = () => {
           </select>
 
           <div className="mt-4">
-            <button className="w-full px-4 text-white bg-black rounded-md hover:bg-gray-700 py-2">
+            <button
+              type="submit"
+              className="w-full px-4 text-white bg-black rounded-md hover:bg-gray-700 py-2"
+            >
               생성하기
             </button>
           </div>
