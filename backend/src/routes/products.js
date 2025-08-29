@@ -34,4 +34,16 @@ router.post("/image", auth, async (req, res, next) => {
   });
 });
 
+router.get("/", async (req, res, next) => {
+  try {
+    const products = await Product.find().populate("writer");
+    return res.status(200).json({
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
+
 module.exports = router;
