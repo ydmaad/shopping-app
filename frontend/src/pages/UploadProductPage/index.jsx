@@ -19,13 +19,13 @@ const UploadProductPage = () => {
     title: "",
     description: "",
     price: 0,
-    continets: 1,
+    continents: 1,
     images: [],
   });
   const userData = useSelector((state) => state.user?.userData);
   const navigate = useNavigate();
 
-  const hadleChange = (event) => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setProduct((prev) => ({
       ...prev,
@@ -33,7 +33,7 @@ const UploadProductPage = () => {
     }));
   };
 
-  const hadleImages = (newImages) => {
+  const handleImages = (newImages) => {
     setProduct((prev) => ({
       ...prev,
       images: newImages,
@@ -62,7 +62,7 @@ const UploadProductPage = () => {
       </div>
 
       <form onSubmit={handleSubmit} className="mt-6">
-        <FileUpload images={product.images} onImageChange={hadleImages} />
+        <FileUpload images={product.images} onImageChange={handleImages} />
 
         <div className="mt-4">
           <label htmlFor="title">이름</label>
@@ -71,7 +71,7 @@ const UploadProductPage = () => {
             id="title"
             value={product.title}
             className="w-full px-4 py-2 bf-white border rounded-md"
-            onChange={hadleChange}
+            onChange={handleChange}
           />
         </div>
         <div className="mt-4">
@@ -81,7 +81,7 @@ const UploadProductPage = () => {
             id="description"
             value={product.description}
             className="w-full px-4 py-2 bf-white border rounded-md"
-            onChange={hadleChange}
+            onChange={handleChange}
           />
         </div>
         <div className="mt-4">
@@ -91,7 +91,7 @@ const UploadProductPage = () => {
             id="price"
             value={product.price}
             className="w-full px-4 py-2 bf-white border rounded-md"
-            onChange={hadleChange}
+            onChange={handleChange}
           />
         </div>
         <div className="mt-4">
@@ -101,10 +101,10 @@ const UploadProductPage = () => {
             id="continents"
             value={product.continets}
             className="w-full px-4 mt-2 bg-white border rounded-md"
-            onChange={hadleChange}
+            onChange={handleChange}
           >
             {continents.map((item) => (
-              <option key={item.key} value="item.key">
+              <option key={item.key} value={item.key}>
                 {item.value}
               </option>
             ))}
