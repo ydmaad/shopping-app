@@ -29,8 +29,8 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
+          <Route index element={<LandingPage />} />
           <Route element={<NotAuthRoutes isAuth={isAuth} />}>
-            <Route index element={<LandingPage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
           </Route>
