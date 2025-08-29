@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authUser } from "./store/thunkFunctions";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import NotAuthRoutes from "./components/NotAuthRoutes";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   const isAuth = useSelector((state) => state.user?.isAuth);
